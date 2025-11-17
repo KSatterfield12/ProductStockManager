@@ -1,0 +1,116 @@
+-- Class Diagram (UML-style) --
++-------------------+
+|     Product       |
++-------------------+
+| - Name: string    |
+| - Price: decimal  |
+| - StockQuantity: int |
++-------------------+
+| + Product()       |
+| + Product(name, price, stockQuantity) |
+| + ToString(): string |
++-------------------+
+
++-------------------+
+|  InventoryManager |
++-------------------+
+| - products: List<Product> |
+| - FileName: string        |
++-------------------+
+| + AddProduct(): void      |
+| + UpdateStock(): void     |
+| + ViewProducts(): void    |
+| + RemoveProduct(): void   |
+| + SearchProduct(): void   |
+| - SaveProducts(): void    |
+| - LoadProducts(): void    |
++-------------------+
+
++-------------------+
+|     Program       |
++-------------------+
+| + Main(): void    |
++-------------------+
+
+Notes: The Product class encapsulates product details. 
+The InventoryManager class contains all methods for managing products and persistence. 
+The Program class contains the main loop and delegates menu choices to InventoryManager.
+
+
+
+-- Control Flow (Flowchart) --
+[Start]
+   ↓
+[Initialize Product List]
+   ↓
+[Display Main Menu]
+   ↓
+[Read User Input]
+   ↓
+┌────────────────────────────────────────────┐
+│            Decision: User Choice           │
+└────────────────────────────────────────────┘
+   ↓
+┌────────────┬────────────┬────────────┬────────────┬────────────┐
+│            │            │            │            │            │
+│   [Add     │ [Update    │  [View     │ [Remove    │   [Exit]   │
+│  Product]  │  Stock]    │ Products]  │ Product]   │            │
+│            │            │            │            │            │
+│            ↓            ↓            ↓            ↓            ↓
+│   Prompt for     Prompt for     Display all   Prompt for     [End]
+│   name, price,   product name   products in   product name
+│   and stock      and change     list          to remove
+│   ↓              ↓             ↓             ↓
+│   Create and     Find product  Loop through  Find and
+│   add product    and update    product list  remove product
+│   ↓              ↓             ↓             ↓
+└────────────┴────────────┴────────────┴────────────┘
+   ↓
+[Return to Main Menu]
+   ↓
+[Repeat Until Exit]
+
+
+
+-- Variables Plan --
+InventoryManager.products: List<Product>
+
+Temporary inputs: string name, decimal price, int stockQuantity, int change
+
+Menu control: string choice, bool exit
+
+
+-- Methods Plan --
+AddProduct: Input name, price, stockQuantity. Validates duplicates, creates product, saves to file.
+
+UpdateStock: Input product name, stock change. Finds product, adjusts stock, prevents negative, saves to file.
+
+ViewProducts: Displays list of products, allows sorting by name, price, or stock.
+
+RemoveProduct: Input product name. Finds product, removes from list, saves to file.
+
+SearchProduct: Input product name. Finds product, displays details.
+
+SaveProducts: Serializes product list to JSON file.
+
+LoadProducts: Deserializes product list from JSON file at startup.
+
+
+-- Control Structures --
+Switch-case: menu navigation in Program.Main.
+
+If-else: validation (duplicate product, invalid input, product exists, stock non-negative).
+
+While loop: keeps program running until exit.
+
+Foreach loop: iterates through product list in ViewProducts.
+
+LINQ methods (Any, Find, OrderBy): used for searching, duplicate prevention, and sorting.
+
+
+-- Loops in Detail --
+Main loop: while (!exit) → keeps menu active in Program.
+
+Product listing loop: foreach (var product in products) → displays inventory in ViewProducts.
+
+Sorting loop: LINQ OrderBy used to sort products by name, price, or stock.
