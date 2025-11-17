@@ -1,0 +1,27 @@
+# Build directories
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Compiled binaries
+*.exe
+*.dll
+*.pdb
+*.mdb
+
+# System files
+Thumbs.db
+Desktop.ini
